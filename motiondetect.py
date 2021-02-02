@@ -13,3 +13,9 @@ while True:
     dilated = cv2.dilate(thresh, None, iterations=3)    #increases the size of foreground object and hence reducing noise.
     (contours,_) = cv2.findContours(dilated, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)    #create a shape around the object
 
+    for contour in contours:
+        (x, y, w, h) = cv2.boundingRect(contour)
+        if cv2.contourArea(contour) < 1000 :
+            continue
+        cv2.rectangle(frame1, (x,y), (x+w, y+h), (0,255,0),2)
+        cv2.putText(frame1,'Status:{}'.format('Moving'),(10,20),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0),2 )
