@@ -19,3 +19,12 @@ while True:
             continue
         cv2.rectangle(frame1, (x,y), (x+w, y+h), (0,255,0),2)
         cv2.putText(frame1,'Status:{}'.format('Moving'),(10,20),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0),2 )
+
+    cv2.imshow('Motion Detection', frame1)
+    frame1 = frame2 # frame2 is assigned to frame1 to check for continous motion
+    check, frame2 = video.read()
+    if cv2.waitKey(1)==27:  #27 is the code for 'Esc button
+        break
+
+video.release()
+cv2.destroyAllWindows()
